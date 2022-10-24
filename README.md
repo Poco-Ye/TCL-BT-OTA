@@ -1,5 +1,6 @@
 # TCL-BT-OTA
 
+![image](./OTA.png)
 ```
 这个我已经开发完成，包括le芯片端和APK端
 
