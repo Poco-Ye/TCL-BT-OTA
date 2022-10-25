@@ -222,7 +222,7 @@ __STATIC uint16_t app_ota_att_read_get(uint16_t att_idx, co_buf_t** pp_buf)
     return status;
 }
 ```
-启蒙一下特征服务
+特征服务
 ```
 enum otas_att_db_handles
 {
@@ -237,5 +237,22 @@ enum otas_att_db_handles
     OTAS_CHAR_DATA_CFG,
 
     OTAS_IDX_NB,
+};
+
+const gatt_att_desc_t otas_att_db[OTAS_IDX_NB] = {
+
+
+    [OTAS_V_SVC] = { {0X00, 0X28, 0},  PROP(RD) | ATT_UUID(16), 0 },
+
+
+    [OTAS_CHAR_CTL]     =   {{0X03, 0X28, 0}, PROP(RD)| ATT_UUID(16), 2},
+    [OTAS_CHAR_CTL_VAL] =   {{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xb0, 0x00, 0x40, 0x51, 0x04, 0xc1, 0xff, 0x00,0xf0},PROP(RD)|PROP(WC)|PROP(N)|ATT_UUID(128), OTAS_VAL_MAX_LEN-3},
+    [OTAS_CHAR_CTL_CFG]    =    {{0X02, 0X29, 0}, PROP(RD) | PROP(WR)| ATT_UUID(16), OPT(NO_OFFSET)|2},
+
+
+    [OTAS_CHAR_DATA]      =   {{0X03, 0X28, 0}, PROP(RD)| ATT_UUID(16), 0},
+    [OTAS_CHAR_DATA_VAL]  =   {{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xb0, 0x00, 0x40, 0x51, 0x04, 0xc2, 0xff, 0x00,0xf0},PROP(RD)|PROP(WC)|PROP(N)|ATT_UUID(128), OTAS_VAL_MAX_LEN-3},
+    [OTAS_CHAR_DATA_CFG]    =    {{0X02, 0X29, 0}, PROP(RD) | PROP(WR)| ATT_UUID(16), OPT(NO_OFFSET)|2},
+
 };
 ```
