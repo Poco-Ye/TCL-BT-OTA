@@ -1,13 +1,11 @@
-这个我已经开发完成，包括le芯片端和APK端
-
-由于这个东西是保密的，只能启蒙一下方法
+这个已开发完成，包括le芯片端和APK端
 
 比较重要的是烧写的时候，是写一笔烧一笔的，写的空中传输是write without rsp，整体很快的，也就是几秒
 
 ![image](./ota.png)
 
 
-启蒙一点写的代码
+
 ```
 __STATIC uint16_t app_ota_att_set(uint8_t conidx,uint16_t att_idx, co_buf_t* p_buf)
 {
@@ -149,7 +147,7 @@ __STATIC uint16_t app_ota_att_set(uint8_t conidx,uint16_t att_idx, co_buf_t* p_b
     return status;
 }
 ```
-启蒙一点读的代码
+
 ```
 __STATIC uint16_t app_ota_att_read_get(uint16_t att_idx, co_buf_t** pp_buf)
 {
@@ -222,7 +220,7 @@ __STATIC uint16_t app_ota_att_read_get(uint16_t att_idx, co_buf_t** pp_buf)
     return status;
 }
 ```
-特征服务
+
 ```
 enum otas_att_db_handles
 {
