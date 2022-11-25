@@ -254,3 +254,65 @@ const gatt_att_desc_t otas_att_db[OTAS_IDX_NB] = {
 
 };
 ```
+```
+写配置
+    public boolean writeOTAIdentfy(byte[] byteArray)
+    {
+        if (mBluetoothGatt != null) {
+            BluetoothGattService service = mBluetoothGatt.getService(UUID_OTA_SERVICE);
+            if (service != null) {
+                mBluetoothGattCharateristic = service.getCharacteristic(UUID_IDENTFY);
+                if (mBluetoothGattCharateristic == null) {
+                    Log.e(TAG, "mBluetoothGattCharateristic is null");
+                    return false;
+                }
+
+                mBluetoothGattCharateristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
+                mBluetoothGattCharateristic.setValue(byteArray);
+                boolean flagWriteCharacteristic = mBluetoothGatt.writeCharacteristic(mBluetoothGattCharateristic);
+                if (!flagWriteCharacteristic) {
+                    Log.e(TAG, "false write");
+                    return false;
+                }else
+                {
+                    return true;
+                }
+            } else {
+                Log.e(TAG, "get UUID_OTA_SERVICE service fail");
+                return false;
+            }
+        }
+        return false;
+    }
+    
+    写数据
+        public boolean writeOTABlock(byte[] byteArray)
+    {
+        if (mBluetoothGatt != null) {
+                    BluetoothGattService service = mBluetoothGatt.getService(UUID_OTA_SERVICE);
+                if (service != null) {
+                    mBluetoothGattCharateristic = service.getCharacteristic(UUID_BLOCK);
+                    if (mBluetoothGattCharateristic == null) {
+                        Log.e(TAG, "mBluetoothGattCharateristic is null");
+                        return false;
+                    }
+
+                    mBluetoothGattCharateristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
+                    mBluetoothGattCharateristic.setValue(byteArray);
+                    boolean flagWriteCharacteristic = mBluetoothGatt.writeCharacteristic(mBluetoothGattCharateristic);
+                    if (!flagWriteCharacteristic) {
+//                    Log.e(TAG, "false write");
+                        return false;
+                    }else
+                {
+                    return true;
+                }
+            } else {
+                Log.e(TAG, "get UUID_OTA_SERVICE service fail");
+                return false;
+            }
+        }
+        return false;
+    }
+```
+
